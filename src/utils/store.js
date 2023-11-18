@@ -1,10 +1,8 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
-import thunk from "redux-thunk";
-// import reducer from "./reducer";
+import { configureStore } from "@reduxjs/toolkit";
 import reducer from "./slice";
 
 export default configureStore({
   reducer: {
-    posts: reducer
-  }
+    posts: reducer,
+  },
 });

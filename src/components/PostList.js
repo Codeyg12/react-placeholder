@@ -1,8 +1,7 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../utils/slice";
-import { Button, Container, Row, Col } from "react-bootstrap";
+import { Button, Container, Row, Col, Stack } from "react-bootstrap";
 
 export default function PostList() {
   const dispatch = useDispatch();
@@ -14,11 +13,11 @@ export default function PostList() {
   }, [dispatch]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <h1 className="text-center">Loading...</h1>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <h1 className="text-center">Error: {error}</h1>;
   }
 
   const postList = data?.map((post) => (
@@ -30,11 +29,20 @@ export default function PostList() {
 
   return (
     <Container className="text-center">
-      <h1 className="text-primary">Post List</h1>
+      <Stack className="mx-auto col-md-4">
+        <h1 className="text-primary">Post List</h1>
+        <Button
+          variant="info"
+          className="text-white"
+          onClick={() => dispatch(fetchPosts())}
+        >
+          Refresh Results
+        </Button>
+      </Stack>
       <Row>{postList}</Row>
       <Button
         variant="info"
-        className="text-white"
+        className="text-white col-md-4"
         onClick={() => dispatch(fetchPosts())}
       >
         Refresh Results
