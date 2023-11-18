@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Button from "react-bootstrap/Button";
+import { Button, Container, Row, Col } from "react-bootstrap";
 // https://tanstack.com/query/latest/docs/react/overview
 
 export default function PostList() {
@@ -16,19 +16,23 @@ export default function PostList() {
 
   console.log(postData);
 
-  const postList = postData?.map((post) => <li key={post.id}>{post.title}</li>);
+  const postList = postData?.map((post) => 
+  <Col key={post.id} md="4">
+    <h2>{post.title}</h2>
+    <p>{post.body}</p>
+  </Col>);
 
   const refreshing = () => {
     setRefresh(!refresh);
   };
 
   return (
-    <div className="text-center">
+    <Container className="text-center">
       <h1 className="text-primary">Post List</h1>
-      <ul>{postList}</ul>
+      <Row>{postList}</Row>
       <Button variant="info" className="text-white" onClick={refreshing}>
         Refresh Results
       </Button>
-    </div>
+    </Container>
   );
 }
