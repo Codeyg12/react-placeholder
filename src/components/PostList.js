@@ -21,7 +21,7 @@ export default function PostList() {
   }
 
   const postList = data?.map((post) => (
-    <Col key={post.id} md="4">
+    <Col key={post.id} md="3">
       <h2>{post.title}</h2>
       <p>{post.body}</p>
     </Col>
