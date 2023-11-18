@@ -1,28 +1,34 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const postsSlice = createSlice({
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
+    const res = await axios.get("https://jsonplaceholder.typicode.com/posts")
+    const randomize = res.data.sort(() => Math.random() - .5).slice(0, 20)
+    return randomize
+})
+
+const postsSlice = createSlice({
     name: 'posts',
     initialState: {
-        data: [],
-        loading: false,
-        error: null
+      data: [],
+      loading: false,
+      error: null,
     },
-    reducers: {
-        fetchPostsRequest: (state) => {
-            state.loading = true,
-            state.error = null
-        },
-        fetchPostsSuccess: (state, action) => {
-            state.loading = false,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+        .addCase(fetchPosts.pending, (state) => {
+            state.loading = true
+        })
+        .addCase(fetchPosts.fulfilled, (state, action) => {
+            state.loading = false
             state.data = action.payload
-        },
-        fetchPostsFail: (state, action) => {
-            state.loading = false,
-            state.error = action.payload
-        }
+        })
+        .addCase(fetchPosts.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+        })
     }
-});
+  });
 
-export const { fetchPostsRequest, fetchPostsSuccess, fetchPostsFail } = postsSlice.actions
-
-export default postsSlice.reducers
+export default postsSlice.reducer
