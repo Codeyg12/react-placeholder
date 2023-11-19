@@ -6,7 +6,6 @@ import { Button, Container, Row, Col, Stack } from "react-bootstrap";
 export default function PostList() {
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.posts);
-  console.log(data);
 
   useEffect(() => {
     dispatch(fetchPosts());
