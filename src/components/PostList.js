@@ -20,7 +20,7 @@ export default function PostList() {
   }
   const postList = data?.map((post) => ( 
     <Col key={post.id} md={3} className="mb-2">
-    <Card className="m-2" style={{ height: '100%'}}>
+    <Card className="m-2 d-flex flex-column" style={{ height: '100%'}}>
       <Card.Header>
         {post.title}
       </Card.Header>
@@ -46,7 +46,7 @@ export default function PostList() {
           Refresh Results
         </Button>
       </Stack>
-      <Row>{postList}</Row>
+      <Row className="g-1">{postList}</Row>
       <Button
         variant="info"
         className="text-white col-md-4 my-2"
