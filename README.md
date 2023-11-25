@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+ Click here to display the deployed app &rarr; [React-Placeholder](https://codeyg12.github.io/react-placeholder/)
+
 ## Available Scripts
 
 In the project directory, you can run:
